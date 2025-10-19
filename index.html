@@ -13,11 +13,14 @@
 
     /* Header / Nav */
     .header{position:fixed;inset:0 0 auto 0;z-index:1000;background:linear-gradient(135deg,#2c3e50 0%,#3498db 100%);color:#fff;padding:1rem 0;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     .logo{font-size:1.5rem;font-weight:700}
-    .nav-links{list-style:none;display:flex;gap:2rem}
+    .nav-right{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+    .nav-links{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap}
     .nav-links a{color:#fff;text-decoration:none;transition:opacity .2s}
     .nav-links a:hover{opacity:.85}
+    .phone-link{color:#fff;text-decoration:none;font-weight:700;white-space:nowrap}
+    .phone-link:hover{opacity:.9}
 
     /* Hero */
     .hero{margin-top:60px;height:100vh;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;background:
@@ -25,8 +28,10 @@
       url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=1600') center/cover no-repeat}
     .hero-content h1{font-size:3.5rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
     .hero-content p{font-size:1.5rem;margin-bottom:2rem;text-shadow:1px 1px 2px rgba(0,0,0,.5)}
+    .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
     .cta-button{display:inline-block;text-decoration:none;cursor:pointer;background:#e74c3c;color:#fff;font-weight:600;padding:1rem 2.5rem;border:0;border-radius:50px;transition:transform .2s,box-shadow .2s}
     .cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .cta-ghost{background:transparent;border:2px solid #fff}
 
     /* Sections */
     .section{max-width:1200px;margin:0 auto;padding:5rem 2rem}
@@ -66,17 +71,27 @@
     .footer{background:#2c3e50;color:#fff;text-align:center;padding:2rem}
     .contact-info{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:2rem}
     .contact-item{display:flex;align-items:center;gap:.5rem}
+    .footer a{color:#fff}
 
     /* Messages */
     .success-message,.error-message{padding:1rem;border-radius:6px;margin-bottom:1rem;display:none;font-weight:600}
     .success-message{background:#27ae60;color:#fff}
     .error-message{background:#e74c3c;color:#fff}
 
+    /* Mobile call FAB */
+    .call-fab{
+      position:fixed;right:16px;bottom:16px;border-radius:999px;
+      background:#27ae60;color:#fff;padding:.9rem 1.1rem;
+      box-shadow:0 10px 20px rgba(0,0,0,.25);text-decoration:none;font-weight:700;
+      display:none;z-index:1100
+    }
+    .call-fab:hover{background:#229954}
+    @media (max-width:768px){ .call-fab{display:inline-block} }
+
     /* Responsive tweaks */
     @media (max-width:768px){
       .hero-content h1{font-size:2rem}
       .hero-content p{font-size:1.2rem}
-      .nav-links{gap:1rem}
       .section{padding:3rem 1rem}
       .form-container{padding:2rem 1.5rem}
     }
@@ -88,6 +103,7 @@
     "@context":"https://schema.org",
     "@type":"LocalBusiness",
     "name":"Dean Nunnelly's Painting LLC",
+    "telephone":"+1-270-577-9120",
     "address":{"@type":"PostalAddress","addressLocality":"Henderson","addressRegion":"KY"},
     "areaServed":["Henderson KY","Evansville IN","Surrounding Areas"]
   }
@@ -98,13 +114,17 @@
   <header class="header">
     <nav class="nav-container">
       <div class="logo">Dean Nunnelly's Painting LLC</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#bid">Get a Bid</a></li>
-      </ul>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#bid">Get a Bid</a></li>
+        </ul>
+        <!-- Click-to-call in header -->
+        <a class="phone-link" href="tel:+12705779120" aria-label="Call or text 270 577 9120">📞 Call/Text: (270) 577-9120</a>
+      </div>
     </nav>
   </header>
 
@@ -113,7 +133,11 @@
     <div class="hero-content">
       <h1>Quality Painting Services</h1>
       <p>Transforming Homes & Businesses in Henderson, KY</p>
-      <a href="#bid" class="cta-button">Request a Free Bid</a>
+      <div class="cta-row">
+        <a href="#bid" class="cta-button">Request a Free Bid</a>
+        <!-- Secondary hero CTA to call/text -->
+        <a href="tel:+12705779120" class="cta-button cta-ghost" aria-label="Call or text now">(270) 577-9120</a>
+      </div>
     </div>
   </section>
 
@@ -174,7 +198,7 @@
       <article class="testimonial-card">
         <div class="testimonial-meta"><strong>Review</strong><span class="t-date">• Oct 6, 2022</span></div>
         <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
-        <p class="t-quote">Dean and his team did an excellent job! Very meticulous about getting everything right. Very nice to work with. We wanted to freshen up everything so, we decided to paint (change colors) of the exterior of our brick home. Dean worked with us and made it happen. We couldn't be happier with the results! Excellent work! Below is the before &amp; after. Get my new lights &amp; shutters up and it's like a new house!</p>
+        <p class="t-quote">Dean and his team did an excellent job! Very meticulous about getting everything right. Very nice to work with. We couldn't be happier with the results! Excellent work! Below is the before &amp; after. Get my new lights &amp; shutters up and it's like a new house!</p>
       </article>
 
       <article class="testimonial-card">
@@ -340,9 +364,13 @@ Dean please post some photos on this post if you have some. Thanks again for eve
     <div class="contact-info">
       <div class="contact-item">📍 Henderson, KY</div>
       <div class="contact-item">📧 Contact via form above</div>
+      <div class="contact-item">📞 <a href="tel:+12705779120">(270) 577-9120</a> (Call/Text)</div>
     </div>
     <p>&copy; 2025 Dean Nunnelly's Painting LLC. All rights reserved.</p>
   </footer>
+
+  <!-- Mobile floating Call/Text button -->
+  <a class="call-fab" href="tel:+12705779120" aria-label="Call or text (270) 577 9120">Call/Text: (270) 577-9120</a>
 
   <script>
     // Smooth scroll
